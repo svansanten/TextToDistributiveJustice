@@ -359,7 +359,7 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
   global fingerprints
   fingerprints.to_csv('fingerprints_mainseed')
 
-  # Convert unique_id col to numeric - account for non-numeric values
+  # Convert unique_id col to numeric, coercing errors to Nan
   out['unique_id'] = pd.to_numeric(out['unique_id'], errors='coerce')
 
   # Combine input df (i.e., df with text column and true category labels)
@@ -453,7 +453,7 @@ def get_response(codebook, llm_query, model, temperature, seed, key):
     model=model, # chatgpt: gpt-3.5-turbo # gpt-4: gpt-4
     messages=[
       {"role": "user", "content": codebook + llm_query}],
-    seed = seed, # add seed parameter, followed per iteration (I hope)
+    seed = seed, # add seed from main
     temperature=temperature, # ChatGPT default is 0.7 (set lower reduce variation across queries)
     max_tokens = max_tokens,
     top_p=1.0,
@@ -487,12 +487,15 @@ def get_classification_categories(codebook, key):
   # Set temperature to 0 to make model deterministic
   temperature = 0
 
-  # Specify model to use
-  #model = "gpt-3.5-turbo-0125"
-  model = "gpt-4o"
+  ## Specify model to use
+  # As of 22-05-2024, gpt-4-turbo-2024-04-09 seems to be the only gpt-model
+  # that returns a fingerprint in addition to gpt-4o
 
-  #As of may 7th seems to be the only gpt that returns a fingerprint
   #model= "gpt-4-turbo-2024-04-09"
+
+  #model = "gpt-3.5-turbo-0125"
+
+  model = "gpt-4o"
 
   # Set seed for category determination as 1
   seed = 1
@@ -556,7 +559,6 @@ def parse_text(response, headers):
         row.remove(' ')
 
     text_df = pd.DataFrame(text_split_split)
-    # Try for inclusion of all columns
     text_df_out = pd.DataFrame(text_df.values, columns=headers)
     text_df_out = text_df_out[text_df_out.iloc[:,1].astype(str).notnull()]
 
@@ -637,9 +639,6 @@ def estimate_time_cost(text_to_annotate, codebook, llm_query,
 
   quit = False
   print("You are about to annotate", len(text_to_annotate), "text samples and the number of iterations is set to", num_iterations)
-  print("Estimated cost range in US Dollars:", cost_low,"-",cost_high)
-  print("Estimated minutes to run gpt_annotate():", time_low,"-",time_high)
-  print("Please note that these are rough estimates.")
   print("")
   waiting_response = True
   while waiting_response:
