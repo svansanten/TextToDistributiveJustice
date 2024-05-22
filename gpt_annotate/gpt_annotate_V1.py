@@ -334,7 +334,7 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
             # Set temperature
             temperature = temperature
             # set seed
-            #seed = 153 #eventueel omzetten naar seed =j
+            seed = seed
             # annotate the data by prompting GPT
             response = get_response(codebook, llm_query, model, temperature, seed, key)
             # parse GPT's response into a clean dataframe
@@ -371,7 +371,7 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
   out_all.fillna(0, inplace=True)
 
   ##### output 1: full annotation results
-  out_all.to_csv('gpt_out_all_iterations_string_mainseed3.csv',index=False)
+  out_all.to_csv('gpt_out_all_iterations_string.csv',index=False)
 
   ## There is no evaluation agains true labels
   return out_all
