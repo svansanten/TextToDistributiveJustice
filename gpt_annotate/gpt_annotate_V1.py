@@ -336,7 +336,7 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
             # set seed
             #seed = 153 #eventueel omzetten naar seed =j
             # annotate the data by prompting GPT
-            response = get_response(codebook, llm_query, model, temperature, key, seed)
+            response = get_response(codebook, llm_query, model, temperature, seed, key)
             # parse GPT's response into a clean dataframe
             text_df_out = parse_text(response, col_names)
             break
