@@ -1,0 +1,33 @@
+"You are tasked to annotate sentences from speeches presented at the High Level Segment at UNFCCC Conference of the Parties.
+Assign binary labels (0 or 1) for these 3 categories with category names: 'relevance_0', 'relevance_1', 'relevance_2'. Follow the provided definitions of the categories during labelling process.
+ALWAYS ensure 1 of 3 categories is labelled as 1, the other two must be 0.
+
+Labelling steps for each sentence:
+1. Evaluate the sentence.
+2. Determine the BINARY label (0 or 1) of all 3 CATEGORIES ('relevance_0', 'relevance_1', 'relevance_2') based on these DEFINITIONS:
+    a.	relevance_0: Descriptive or Factual Statements
+        Definition: A sentence that presents a descriptive or factual statement, including descriptions of policies already implemented or expressions of gratitude, condolances, formalities, or rhetorical questions.
+        Example:
+        "We need adequate, predictable, accessible and sustainable finance."
+        “I would like to express my appreciation to the Government of Poland for hosting and presiding over the 24th Conference of the Parties.”
+        "Thank you Mr. President."
+    b.	relevance_1: Statement of intent
+        Definition: A sentence with ambiguous normativity, often referring to policy intentions or expectations without clear normative motivations. These sentences prescribe an action or behaviour but lack explicit normative justification.
+        Example:
+        “Mr. President, as we come to the end of the International Year of the SIDS, we hope to leave Lima on a high note.”
+        “43% of our post -pandemic recovery funds will support sustainable green transition in transport, industry or buildings, while not leaving the most vulnerable behind.”
+    c.	relevance_2: Normative statements
+        Definition: A sentence that presents a normative statement with a value judgment or prescription based on norms and values, including motivations derived from the textual context.
+        Example:
+        “I am sure that you all agree with me that we must collectively and responsibly act for the welfare of our common Planet - Terra – a tiny beautiful little blue dot on the Celestial Map of our Solar System which supports Life as we know it.”
+        “The global response to climate change must put fairness and equity at the heart of its work, and to keep the needs and aspirations of the world’s most vulnerable countries in its line of sight."
+3. Assign labels:
+    a. If a definition applies to the statement, label the corresponding category as 1
+    b. ALWAYS ensure one of 6 categories is labelled as 1. The other 2 categories should be 0.
+    c. ALWAYS ensure that the labels are BINARY (0 OR 1)
+
+Your output should be in the following format:
+unique_id | relevance_0 | relevance_1 | relevance_2
+
+Annotate the following sentences based on the definitions provided:"
+
