@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-### STRING BASED ANNOTATION - inclusion of seed per iteration
+### STRING BASED ANNOTATION - inclusion of seed per iteration - UPDATE TEXT
 
 ## Overview
 Given a codebook (.txt) and a dataset (.csv) that has one text column and any number of category columns as binary indicators, the main function (`gpt_annotate`) annotates
@@ -15,9 +15,11 @@ Flow of `gpt_annotate`:
         then also adds whether it is a true positive, false positive, true negative, or false negative.
 *   4) Finally, if provided human labels, the function calculates performance metrics (accuracy, precision, recall, and f1) for every category.
 
-The main function (`gpt_annotate`) returns one .csv
+The main function (`gpt_annotate`) returns two .csv files
 *   1) `gpt_out_all_iterations.csv`
   *   Raw outputs for every iteration.
+*   2) 'fingerprints_all.csv'
+  *   All fingerprints of the GPT used
 
 Our code aims to streamline automated text annotation for different datasets and numbers of categories.
 
@@ -40,7 +42,6 @@ import math
 import time
 import numpy as np
 import tiktoken
-from openai import OpenAI
 import os
 
 # Create a global fingerprint dataframe
@@ -90,13 +91,6 @@ def prepare_data(text_to_annotate, codebook, key,
                     .reset_index() \
                     .rename(columns={'index':'unique_id'})
 
-  ##### Minor Cleaning
-  # Drop any Unnamed columns
-  if any('Unnamed' in col for col in text_to_annotate.columns):
-    text_to_annotate = text_to_annotate.drop(text_to_annotate.filter(like='Unnamed').columns, axis=1)
-  # Drop any NA values
-  text_to_annotate = text_to_annotate.dropna()
-
   ########## Confirming data is in correct format
   ##### 1) Check whether second column is string
   # rename second column to be 'text'
@@ -111,32 +105,11 @@ def prepare_data(text_to_annotate, codebook, key,
     print("Sample data format:")
     error_message(human_labels)
     return original_df
-  
-  ##### 2) If human_labels == False, there should only be 2 columns
-  if human_labels == False and len(text_to_annotate.columns) != 2:
-    print("ERROR: You have set human_labels = False, which means you should only have two columns in your data.")
-    print("")
-    print("Your data:")
-    print(text_to_annotate.head())
-    print("")
-    print("Sample data format:")
-    error_message(human_labels)
-    return original_df
-
-  ##### 3) If human_labels == True, there should be more than 2 columns
-  if human_labels == True and len(text_to_annotate.columns) < 3:
-    print("ERROR: You have set human_labels = True (default value), which means you should have more than 2 columns in your data.")
-    print("")
-    print("Your data:")
-    print(text_to_annotate.head())
-    print("")
-    print("Sample data format:")
-    error_message(human_labels)
-    return original_df
 
   ##### 5) Add llm_query column that includes a unique ID identifier per text sample
   text_to_annotate['llm_query'] = text_to_annotate.apply(lambda x: str(x['unique_id']) + " " + str(x['text']) + "\n", axis=1)
 
+  ###!# Checking for category names is important - ensures checking if codebook is correct
   ##### 6) Make sure category names in codebook exactly match category names in text_to_annotate
   # extract category names from codebook
   if human_labels:
@@ -191,8 +164,7 @@ def prepare_data(text_to_annotate, codebook, key,
 
 def gpt_annotate(text_to_annotate, codebook, key, seed,
                  num_iterations = 3, model = "gpt-4", temperature = 0.6, batch_size = 10,
-                 human_labels = True,  data_prep_warning = True,
-                 time_cost_warning = True):
+                 human_labels = True, time_cost_warning = True):
   """
   Loop over the text_to_annotate rows in batches and classify each text sample in each batch for multiple iterations. 
   Store outputs in a csv. Function is calculated in batches in case of crash.
@@ -245,51 +217,6 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
   # set OpenAI key
   openai.api_key = key
 
-  # Double check that user has confirmed format of the data
-  if data_prep_warning:
-    waiting_response = True
-    while waiting_response:
-      input_response = input("Have you successfully run prepare_data() to ensure text_to_annotate is in correct format? (Options: Y or N) ")
-      input_response = str(input_response).lower()
-      if input_response == "y" or input_response == "yes":
-        # If user has run prepare_data(), confirm that data is in correct format
-        # first, check if first column is title "unique_id"
-        if text_to_annotate.columns[0] == 'unique_id' and text_to_annotate.columns[-1] == 'llm_query':
-            try:
-              text_to_annotate_copy = text_to_annotate.iloc[:, 1:-1]
-            except pd.core.indexing.IndexingError:
-              print("")
-              print("ERROR: Run prepare_data(text_to_annotate, codebook, key) before running gpt_annotate(text_to_annotate, codebook, key).")
-            text_to_annotate_copy = prepare_data(text_to_annotate_copy, codebook, key, prep_codebook = False, human_labels = human_labels, no_print_preview = True)
-            # if there was an error, exit gpt_annotate
-            if text_to_annotate_copy.columns[0] != "unique_id":
-              if human_labels:
-                return None, None, None, None
-              elif human_labels == False:
-                return None, None
-        else:
-            print("ERROR: First column should be title 'unique_id' and last column should be titled 'llm_query'")
-            print("Try running prepare_data() again")
-            print("")
-            print("Your data:")
-            print(text_to_annotate.head())
-            print("")
-            print("Sample data format:")
-            if human_labels:
-                return None, None, None, None
-            elif human_labels == False:
-                return None, None
-        waiting_response = False
-      elif input_response == "n" or input_response == "no":
-        print("")
-        print("Run prepare_data(text_to_annotate, codebook, key) before running gpt_annotate(text_to_annotate, codebook, key).")
-        if human_labels:
-            return None, None, None, None
-        elif human_labels == False:
-            return None, None
-      else:
-        print("Please input Y or N.")
-
   # df to store results
   out = pd.DataFrame()
 
@@ -311,8 +238,13 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
     # Iterate over number of batches
     for i in range(num_batches):
       # Based on batch, determine starting row and end row
+      ### Check if final row is included!
       start_row = i*batch_size
-      end_row = (i+1)*batch_size
+      end_row = (i+1)*batch_size + 1 # +1 added
+
+      # Handle case where end_row might exceed the number of rows (final batch)
+      if end_row > num_rows:
+          end_row = num_rows
 
       # Extract the text samples to annotate
       llm_query = text_to_annotate['llm_query'][start_row:end_row].str.cat(sep=' ')
@@ -321,13 +253,14 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
       need_response = True
       while need_response:
         fails = 0
-        # confirm time and cost with user before annotating data
+        # confirm time and cost with user before annotating data - can be removed?
         if fails == 0 and j == 0 and i == 0 and time_cost_warning:
           quit = estimate_time_cost(text_to_annotate, codebook, llm_query, model, num_iterations, num_batches, batch_size, col_names[1:])
           if quit and human_labels:
             return None, None, None, None
           elif quit and human_labels == False:
             return None, None
+
         # if GPT fails to annotate a batch 3 times, skip the batch
         while(fails < 3):
           try:
@@ -349,15 +282,19 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
       # update iteration
       text_df_out['iteration'] = j+1
 
-      # add iteration annotation results to output df
-      out = pd.concat([out, text_df_out])
+      # add iteration annotation results to output df - if standard fingerprint is used
+      if response.system_fingerprint == 'fp_729ea513f7':
+        print(f'Iteration{j}, batch{i}: fingerprintmatch found!')
+        out = pd.concat([out, text_df_out])
+      else:
+        print(f'Iteration{j}, batch{i}: fingerprint does not match'))
       time.sleep(.5)
+
     # print status report  
     print("iteration: ", j+1, "completed")
 
-  # Save fingerprints dataframe to CSV
-  global fingerprints
-  fingerprints.to_csv('fingerprints_mainseed')
+  # Strip any leading or trailing whitespace from the out dataframe
+  out = out.applymap(lambda x: x.strip() if isinstance(x,str) else x)
 
   # Convert unique_id col to numeric, coercing errors to Nan
   out['unique_id'] = pd.to_numeric(out['unique_id'], errors='coerce')
@@ -370,10 +307,13 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
   out_all.replace('-', np.nan, inplace=True)
   out_all.fillna(0, inplace=True)
 
-  ##### output 1: full annotation results
-  out_all.to_csv('gpt_out_all_iterations_string.csv',index=False)
+  ##### output: full annotation results - seed name is included in file
+  out_all.to_csv(f'gpt_out_all/all_iterations_string_{seed}.csv',index=False)
 
-  ## There is no evaluation agains true labels
+  # OUTPUT: Save fingerprints dataframe to CSV - final dataframe includes all seeds
+  global fingerprints
+  fingerprints.to_csv(f'fingerprints_all.csv')
+
   return out_all
 
 
@@ -463,6 +403,7 @@ def get_response(codebook, llm_query, model, temperature, seed, key):
 
   # Save fingerprint of each analysis
   system_fingerprint = response.system_fingerprint
+
   global fingerprints  # Access the global DataFrame
   new_row = pd.DataFrame({"System_Fingerprint": [system_fingerprint]})
   fingerprints = pd.concat([fingerprints, new_row], ignore_index=True)
@@ -488,17 +429,14 @@ def get_classification_categories(codebook, key):
   temperature = 0
 
   ## Specify model to use
-  # As of 22-05-2024, gpt-4-turbo-2024-04-09 seems to be the only gpt-model
-  # that returns a fingerprint in addition to gpt-4o
+  # As of 22-05-2024, gpt-4-turbo-2024-04-09 seems to be the only gpt-model that returns a fingerprint in addition to gpt-4o
 
   #model= "gpt-4-turbo-2024-04-09"
-
   #model = "gpt-3.5-turbo-0125"
-
   model = "gpt-4o"
 
   # Set seed for category determination as 1
-  seed = 1
+  seed = 1234
 
   from openai import OpenAI
   
@@ -562,9 +500,6 @@ def parse_text(response, headers):
     text_df_out = pd.DataFrame(text_df.values, columns=headers)
     text_df_out = text_df_out[text_df_out.iloc[:,1].astype(str).notnull()]
 
-    # Remove checking for numerical values
-    #text_df_out = text_df_out[pd.to_numeric(text_df_out.iloc[:,1], errors='coerce').notnull()]
-
   except Exception as e:
     print(
       "ERROR: GPT output not in specified categories. Make your codebook clearer to indicate what the output format should be.")
@@ -582,6 +517,7 @@ def estimate_time_cost(text_to_annotate, codebook, llm_query,
                        model, num_iterations, num_batches, batch_size, col_names):
   """
   This function estimates the cost and time to run gpt_annotate().
+  It is not accurate as a GPT-4o is used.
 
   text_to_annotate:
     Input data that will be annotated.
