@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-### STRING BASED ANNOTATION - inclusion of seed per iteration
+### NUMERICAL ANNOTATION
+Inclusion of seed
 
 ## Overview
+
 Given a codebook (.txt) and a dataset (.csv) that has one text column and any number of category columns as binary indicators, the main function (`gpt_annotate`) annotates
 all the samples using an OpenAI GPT model (ChatGPT or GPT-4) and calculates performance metrics (if there are provided human labels). Before running `gpt_annotate`,
 users should run `prepare_data` to ensure that their data is in the correct format.
@@ -15,9 +17,16 @@ Flow of `gpt_annotate`:
         then also adds whether it is a true positive, false positive, true negative, or false negative.
 *   4) Finally, if provided human labels, the function calculates performance metrics (accuracy, precision, recall, and f1) for every category.
 
-The main function (`gpt_annotate`) returns one .csv
+The main function (`gpt_annotate`) returns four .csv's, if human labels are provided.
+If no human labels are provided, the main function only returns 1 and 2 listed below.
 *   1) `gpt_out_all_iterations.csv`
   *   Raw outputs for every iteration.
+*   2) `gpt_out_final.csv`
+  *   Annotation outputs after taking modal category answer and calculating consistency scores.
+*   3) `performance_metrics.csv`
+  *   Accuracy, precision, recall, and f1.
+*   4) `incorrect.csv`
+  *   Any incorrect classification or classification with less than 1.0 consistency.
 
 Our code aims to streamline automated text annotation for different datasets and numbers of categories.
 
@@ -40,12 +49,11 @@ import math
 import time
 import numpy as np
 import tiktoken
-from openai import OpenAI
 import os
 
 # Create a global fingerprint dataframe
 fingerprints = pd.DataFrame()
-
+missed_batches = pd.DataFrame()
 def prepare_data(text_to_annotate, codebook, key,
                  prep_codebook = False, human_labels = True, no_print_preview = False):
 
@@ -90,42 +98,13 @@ def prepare_data(text_to_annotate, codebook, key,
                     .reset_index() \
                     .rename(columns={'index':'unique_id'})
 
-  ##### Minor Cleaning
-  # Drop any Unnamed columns
-  if any('Unnamed' in col for col in text_to_annotate.columns):
-    text_to_annotate = text_to_annotate.drop(text_to_annotate.filter(like='Unnamed').columns, axis=1)
-  # Drop any NA values
-  text_to_annotate = text_to_annotate.dropna()
-
-  ########## Confirming data is in correct format
+  ########## Confirming data is in correct format - could be removed
   ##### 1) Check whether second column is string
   # rename second column to be 'text'
   text_to_annotate.columns.values[1] = 'text'
   # check whether second column is string
   if not (text_to_annotate.iloc[:, 1].dtype == 'string' or text_to_annotate.iloc[:, 1].dtype == 'object'):
     print("ERROR: Second column should be the text that you want to annotate.")
-    print("")
-    print("Your data:")
-    print(text_to_annotate.head())
-    print("")
-    print("Sample data format:")
-    error_message(human_labels)
-    return original_df
-  
-  ##### 2) If human_labels == False, there should only be 2 columns
-  if human_labels == False and len(text_to_annotate.columns) != 2:
-    print("ERROR: You have set human_labels = False, which means you should only have two columns in your data.")
-    print("")
-    print("Your data:")
-    print(text_to_annotate.head())
-    print("")
-    print("Sample data format:")
-    error_message(human_labels)
-    return original_df
-
-  ##### 3) If human_labels == True, there should be more than 2 columns
-  if human_labels == True and len(text_to_annotate.columns) < 3:
-    print("ERROR: You have set human_labels = True (default value), which means you should have more than 2 columns in your data.")
     print("")
     print("Your data:")
     print(text_to_annotate.head())
@@ -189,10 +168,9 @@ def prepare_data(text_to_annotate, codebook, key,
     return text_to_annotate
 
 
-def gpt_annotate(text_to_annotate, codebook, key, seed,
+def gpt_annotate(text_to_annotate, codebook, key, seed, fingerprint, experiment,
                  num_iterations = 3, model = "gpt-4", temperature = 0.6, batch_size = 10,
-                 human_labels = True,  data_prep_warning = True,
-                 time_cost_warning = True):
+                 human_labels = True):
   """
   Loop over the text_to_annotate rows in batches and classify each text sample in each batch for multiple iterations. 
   Store outputs in a csv. Function is calculated in batches in case of crash.
@@ -207,7 +185,6 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
     Number of times to classify each text sample.
   model:
     OpenAI GPT model, which is either gpt-3.5-turbo or gpt-4
-    base model is set to 3.5-turbo - 16-5
   temperature: 
     LLM temperature parameter (ranges 0 to 1), which indicates the degree of diversity to introduce into the model.
   batch_size:
@@ -219,23 +196,13 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
   time_cost_warning: 
     boolean indicating whether to print time_cost_warning
 
-  Returns:
-    gpt_annotate returns the four .csv's below, if human labels are provided. If no human labels are provided, 
-    gpt_annotate only returns gpt_out_all_iterations.csv and gpt_out_final.csv
-    
-    1) `gpt_out_all_iterations.csv`
-        Raw outputs for every iteration.
-    2) `gpt_out_final.csv`
-        Annotation outputs after taking modal category answer and calculating consistency scores.
-    3) `performance_metrics.csv`
-        Accuracy, precision, recall, and f1.
-    4) `incorrect.csv`
-        Any incorrect classification or classification with less than 1.0 consistency.
 
+  Returns 5 files
   """
 
+  
   from openai import OpenAI
-
+  
   client = OpenAI(
     api_key=key,
     )
@@ -244,51 +211,6 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
 
   # set OpenAI key
   openai.api_key = key
-
-  # Double check that user has confirmed format of the data
-  if data_prep_warning:
-    waiting_response = True
-    while waiting_response:
-      input_response = input("Have you successfully run prepare_data() to ensure text_to_annotate is in correct format? (Options: Y or N) ")
-      input_response = str(input_response).lower()
-      if input_response == "y" or input_response == "yes":
-        # If user has run prepare_data(), confirm that data is in correct format
-        # first, check if first column is title "unique_id"
-        if text_to_annotate.columns[0] == 'unique_id' and text_to_annotate.columns[-1] == 'llm_query':
-            try:
-              text_to_annotate_copy = text_to_annotate.iloc[:, 1:-1]
-            except pd.core.indexing.IndexingError:
-              print("")
-              print("ERROR: Run prepare_data(text_to_annotate, codebook, key) before running gpt_annotate(text_to_annotate, codebook, key).")
-            text_to_annotate_copy = prepare_data(text_to_annotate_copy, codebook, key, prep_codebook = False, human_labels = human_labels, no_print_preview = True)
-            # if there was an error, exit gpt_annotate
-            if text_to_annotate_copy.columns[0] != "unique_id":
-              if human_labels:
-                return None, None, None, None
-              elif human_labels == False:
-                return None, None
-        else:
-            print("ERROR: First column should be title 'unique_id' and last column should be titled 'llm_query'")
-            print("Try running prepare_data() again")
-            print("")
-            print("Your data:")
-            print(text_to_annotate.head())
-            print("")
-            print("Sample data format:")
-            if human_labels:
-                return None, None, None, None
-            elif human_labels == False:
-                return None, None
-        waiting_response = False
-      elif input_response == "n" or input_response == "no":
-        print("")
-        print("Run prepare_data(text_to_annotate, codebook, key) before running gpt_annotate(text_to_annotate, codebook, key).")
-        if human_labels:
-            return None, None, None, None
-        elif human_labels == False:
-            return None, None
-      else:
-        print("Please input Y or N.")
 
   # df to store results
   out = pd.DataFrame()
@@ -310,9 +232,13 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
   for j in range(num_iterations):
     # Iterate over number of batches
     for i in range(num_batches):
-      # Based on batch, determine starting row and end row
+      # Based on batch, determine starting row and end row - row 0 is now not included
       start_row = i*batch_size
       end_row = (i+1)*batch_size
+
+      # Handle case where end_row might exceed the number of rows (final batch)
+      if end_row > num_rows:
+          end_row = num_rows
 
       # Extract the text samples to annotate
       llm_query = text_to_annotate['llm_query'][start_row:end_row].str.cat(sep=' ')
@@ -321,19 +247,22 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
       need_response = True
       while need_response:
         fails = 0
-        # confirm time and cost with user before annotating data
-        if fails == 0 and j == 0 and i == 0 and time_cost_warning:
-          quit = estimate_time_cost(text_to_annotate, codebook, llm_query, model, num_iterations, num_batches, batch_size, col_names[1:])
-          if quit and human_labels:
-            return None, None, None, None
-          elif quit and human_labels == False:
-            return None, None
+
+      ##Blocking annoying popup
+        # # confirm time and cost with user before annotating data - can be removed?
+        # if fails == 0 and j == 0 and i == 0 and time_cost_warning:
+        #   quit = estimate_time_cost(text_to_annotate, codebook, llm_query, model, num_iterations, num_batches, batch_size, col_names[1:])
+        #   if quit and human_labels:
+        #     return None, None, None, None
+        #   elif quit and human_labels == False:
+        #     return None, None
+
         # if GPT fails to annotate a batch 3 times, skip the batch
         while(fails < 3):
           try:
             # Set temperature
             temperature = temperature
-            # set seed
+            # Set seed
             seed = seed
             # annotate the data by prompting GPT
             response = get_response(codebook, llm_query, model, temperature, seed, key)
@@ -349,17 +278,30 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
       # update iteration
       text_df_out['iteration'] = j+1
 
-      # add iteration annotation results to output df
-      out = pd.concat([out, text_df_out])
+      # add iteration annotation results to output df - if standard fingerprint is used
+      if response.system_fingerprint == fingerprint:
+        print(f'Seed: {seed}: Iteration {j+1}, batch {i+1}: fingerprintmatch found!')
+        out = pd.concat([out, text_df_out])
+      else:
+        missed_batch = f'{seed} - I{j + 1} - B{i + 1}'
+        print(f'{missed batch}: fingerprint does not match')
+        global missed_batches  # Access the global DataFrame
+        new_row = pd.DataFrame({"Missed batch": [missed_batch]})
+        missed_batches = pd.concat([missed_batch, new_row], ignore_index=True)
+
       time.sleep(.5)
+
     # print status report  
     print("iteration: ", j+1, "completed")
 
-  # Save fingerprints dataframe to CSV
-  global fingerprints
-  fingerprints.to_csv('fingerprints_mainseed')
 
-  # Convert unique_id col to numeric, coercing errors to Nan
+  ## Strip any leading or trailing whitespace from the 'unique_id' column - counter mistakes made in unique_id column
+  ##out['unique_id'] = out['unique_id'].str.strip()
+
+  # Strip any leading or trailing whitespace from the out dataframe
+  out = out.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+
+  # Convert 'unique_id' column to numeric, coercing errors to NaN
   out['unique_id'] = pd.to_numeric(out['unique_id'], errors='coerce')
 
   # Combine input df (i.e., df with text column and true category labels)
@@ -371,12 +313,53 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
   out_all.fillna(0, inplace=True)
 
   ##### output 1: full annotation results
-  out_all.to_csv('gpt_out_all_iterations_string.csv',index=False)
+  out_all.to_csv(f'NUM_RESULT/{experiment}/all_iterations_num/all_iterations_num_T{temperature}_{seed}.csv',index=False)
 
-  ## There is no evaluation agains true labels
-  return out_all
+  # calculate modal label and consistency score
+  out_mode = get_mode_and_consistency(out_all, col_names,num_iterations,human_labels)
 
+  if human_labels == True:
+    # evaluate classification per category
+    num_categories = len(col_names) - 1 # account for unique_id
+    for label in range(0, num_categories):
+      out_final = evaluate_classification(out_mode, label, num_categories)
 
+    ##### output 2: final annotation results with modal label and consistency score
+    out_final.to_csv(f'NUM_RESULT/{experiment}/final_num/final_num_T{temperature}_{seed}.csv',index=False)
+
+    # calculate performance metrics
+    performance = performance_metrics(col_names, out_final)
+
+    ##### output 3: performance metrics
+    performance.to_csv(f'NUM_RESULT/{experiment}/performance_metrics_num/performance_metrics_T{temperature}_{seed}.csv',index=False)
+      
+    # Determine incorrect classifications and classifications with less than 1.0 consistency
+    incorrect = filter_incorrect(out_final)
+
+    ##### output 4: Incorrect classifications 
+    incorrect.to_csv(f'NUM_RESULT/{experiment}/incorrect_num/incorrect_T{temperature}_{seed}.csv',index=False)
+
+    #### OUTPUT FINGERPRINTS
+    # Save fingerprints dataframe to CSV - final dataframe includes all seeds
+    global fingerprints
+    fingerprints.to_csv(f'NUM_RESULT/{experiment}/T{temperature}_fingerprints_all.csv')
+    #### OUTPUT MISSED BATCHES
+    global missed_batches
+    missed_batches.to_csv(f'NUM_RESULT/{experiment}/T{temperature}_missed_batches.csv')
+
+    return out_all, out_final, performance, incorrect
+
+  else:
+    # if not assessing performance against human annotators, then only save out_mode
+    out_final = out_mode.copy()
+    out_final.to_csv('gpt_out_final.csv',index=False)
+
+    #### OUTPUT FINGERPRINTS
+    # Save fingerprints dataframe to CSV - final dataframe includes all seeds
+    # global fingerprints
+    # fingerprints.to_csv(f'fingerprints_all.csv')
+
+    return out_all, out_final
 
 ########### Helper Functions
 
@@ -420,8 +403,6 @@ def error_message(human_labels = True):
 
 def get_response(codebook, llm_query, model, temperature, seed, key):
   """
-  Added seed element - function is used when annotating sentences
-
   Function to query OpenAI's API and get an LLM response.
 
   Codebook: 
@@ -450,11 +431,11 @@ def get_response(codebook, llm_query, model, temperature, seed, key):
 
   # Create function to llm_query GPT - all parameters are the same for each batch
   response = client.chat.completions.create(
-    model=model, # chatgpt: gpt-3.5-turbo # gpt-4: gpt-4
+    model=model, # chatgpt: gpt-3.5-turbo # gpt-4: gpt-4o
     messages=[
       {"role": "user", "content": codebook + llm_query}],
-    seed = seed, # add seed from main
-    temperature=temperature, # ChatGPT default is 0.7 (set lower reduce variation across queries)
+    seed = seed,
+    temperature=temperature,
     max_tokens = max_tokens,
     top_p=1.0,
     frequency_penalty=0.0,
@@ -463,6 +444,7 @@ def get_response(codebook, llm_query, model, temperature, seed, key):
 
   # Save fingerprint of each analysis
   system_fingerprint = response.system_fingerprint
+
   global fingerprints  # Access the global DataFrame
   new_row = pd.DataFrame({"System_Fingerprint": [system_fingerprint]})
   fingerprints = pd.concat([fingerprints, new_row], ignore_index=True)
@@ -482,24 +464,21 @@ def get_classification_categories(codebook, key):
   """
 
   # llm_query to ask GPT for categories from codebook
-  llm_query = "Part 2: I've provided a codebook in the previous sentences. Please print the category names in the order you will classify them. Ignore every other task that I described in the codebook.   I only want to know the categories. Do not include any text numbers or any annotations in your response. Do not include any language like 'The categories to be identified are:'. Only include the names of the categories you are identifying. : "
+  llm_query = "Part 2: I've provided a codebook in the previous sentences. Please print the categories in the order you will classify them. They are presented the following way: 'Label for the categories named: [...]'. Ignore every other task that I described in the codebook.   I only want to know the categories. Do not include any text numbers or any annotations in your response. Do not include any language like 'The categories to be identified are:'. Only include the names of the categories you are identifying. : "
 
   # Set temperature to 0 to make model deterministic
   temperature = 0
 
   ## Specify model to use
-  # As of 22-05-2024, gpt-4-turbo-2024-04-09 seems to be the only gpt-model
-  # that returns a fingerprint in addition to gpt-4o
+  # As of 22-05-2024, gpt-4-turbo-2024-04-09 seems to be the only gpt-model that returns a fingerprint in addition to gpt-4o
 
-  #model= "gpt-4-turbo-2024-04-09"
-
-  #model = "gpt-3.5-turbo-0125"
-
+  # model= "gpt-4-turbo-2024-04-09"
+  # model = "gpt-3.5-turbo-0125"
   model = "gpt-4o"
 
-  # Set seed for category determination as 1
-  seed = 1
-
+  # Set seed for category determination
+  seed = 1234
+  
   from openai import OpenAI
   
   client = OpenAI(
@@ -511,12 +490,13 @@ def get_classification_categories(codebook, key):
   ### Get GPT response and clean response
   response = get_response(codebook, llm_query, model, temperature, seed, key)
 
-  # print full response
+  ## Print full response codebook evaluation
   print(response)
 
   text = response.choices[0].message.content
   text_split = text.split('\n')
   text_out = text_split[0]
+
   # text_out_list is final output of categories as a list
   codebook_columns = text_out.split(', ')
 
@@ -560,17 +540,228 @@ def parse_text(response, headers):
 
     text_df = pd.DataFrame(text_split_split)
     text_df_out = pd.DataFrame(text_df.values, columns=headers)
-    text_df_out = text_df_out[text_df_out.iloc[:,1].astype(str).notnull()]
-
-    # Remove checking for numerical values
-    #text_df_out = text_df_out[pd.to_numeric(text_df_out.iloc[:,1], errors='coerce').notnull()]
+    #Check if all values are numeric - as the analysis is based on one-hot coding
+    text_df_out = text_df_out[pd.to_numeric(text_df_out.iloc[:,1], errors='coerce').notnull()]
 
   except Exception as e:
-    print(
-      "ERROR: GPT output not in specified categories. Make your codebook clearer to indicate what the output format should be.")
-    print("Try running prepare_data(text_to_annotate, codebook, key, prep_codebook = True")
-    print("")
+        print("ERROR: GPT output not in specified categories. Make your codebook clearer to indicate what the output format should be.")
+        print("Try running prepare_data(text_to_annotate, codebook, key, prep_codebook = True")
+        print("")
   return text_df_out
+
+def get_mode_and_consistency(df, col_names, num_iterations, human_labels):
+  """
+  This function calculates the modal label across iterations and calculates the 
+  LLMs consistency score across label annotations.
+
+  df:
+    Input dataframe (text_to_annotate)
+  col_names:
+    Category names to be annotated
+  num_iterations:
+    number of iterations in gpt_annotate
+  
+  Returns:
+    Modal label across iterations and consistency score for every text annotation.
+
+  """
+
+  # Drop unique_id column in list of category names
+  categories_names = col_names[1:]
+  # Change names to add a 'y' at end to match the output df, if human_labels == True
+  if human_labels == True:
+    categories_names = [name + "_y" for name in categories_names]
+
+  ##### Calculate modal label classification across iterations
+  # Convert dataframe to numeric
+  df_numeric = df.apply(pd.to_numeric, errors='coerce')
+  # Group by unique_id
+  grouped = df_numeric.groupby('unique_id', group_keys=False)
+  # Calculate modal label classification per unique id (.iloc[0] means take the first value if there are ties)
+  modal_values = grouped[categories_names].apply(lambda x: x.mode().iloc[0])
+  # Create consistency score by calculating the number of times the modal answer appears per iteration
+  consistency = grouped[categories_names].apply(lambda x: (x.mode().iloc[0] == x).sum()/num_iterations)
+
+  ##### Data cleaning for new dfs related to consistency scores
+  # add the string 'consistency_' to the column names of the consistency df
+  consistency.columns = ['consistency_' + col for col in consistency.columns]
+  # drop '_y' string from each column name of the consistency df, if human_labels == True
+  if human_labels == True:
+    consistency.columns = consistency.columns.str.replace(r'_y$', '',regex=True)
+  # combine the modal label classification to the consistency score
+  df_combined = pd.concat([modal_values, consistency], axis=1)
+  # reset index
+  df_combined = df_combined.reset_index()
+  # in the modal label column name, replace '_y' with '_pred'
+  if human_labels == True:
+    df_combined.columns = [col.replace('_y', '_pred') if '_y' in col else col for col in df_combined.columns]
+  # drop first column
+  df_combined = df_combined.drop(df_combined.columns[0], axis=1)
+
+  ##### Data cleaning for the input df (combine with )
+  # drop duplicates
+  df_new = df.drop_duplicates(subset=['unique_id'])
+  # replace '_x' with '_pred'
+  if human_labels == True:
+    df_new.columns = [col.replace('_x', '_true') if '_x' in col else col for col in df_new.columns]
+    # add 2 to the length of the categories (to account for unique id and text columns)
+    length_of_col = 2 + len(categories_names)
+    # clean up columns included in df
+    df_new = df_new.iloc[:,0:length_of_col]
+    df_new = df_new.reset_index()
+    df_new = df_new.drop(df_new.columns[0], axis=1)
+  else:
+    first_two_columns = df_new.iloc[:, 0:2]
+    df_new = pd.DataFrame(first_two_columns)
+    df_new = df_new.reset_index()
+
+  # combine into final df
+  out = pd.concat([df_new, df_combined], axis=1)
+
+
+  return out
+
+def evaluate_classification(df, category, num_categories):
+  """
+  Determines whether the classification is correct, then also adds whether it is a 
+  true positive, false positive, true negative, or false negative
+
+  df:
+    Input dataframe (text_to_annotate)
+  Category:
+    Category names to be annotated
+  num_categories:
+    total number of annotation categories
+
+  Returns:
+    Added columns to input dataframe specifying whether the GPT annotation category is correct and whether it is a tp, fp, tn, or fn
+  """
+
+  ## Potential change here to counter the 2's in the outcome
+
+  # account for indexing starting at 0
+  category = category + 1
+  # specify category
+  correct = "correct" + "_" + str(category)
+  tp = "tp" + "_" + str(category)
+  tn = "tn" + "_" + str(category)
+  fp = "fp" + "_" + str(category)
+  fn = "fn" + "_" + str(category)
+
+  # account for text col and unique id (but already added one to account for zero index start)
+  category = category + 1
+
+  # Ensure predicted category values are binary - account for 2's in answers
+  df.iloc[:, category + num_categories] = df.iloc[:, category + num_categories].replace(2, 1)
+
+  # evaluate classification
+  df[correct] = (df.iloc[:, category] == df.iloc[:, category+num_categories].astype(int)).astype(int)
+  df[tp] = ((df.iloc[:, category] == 1) & (df.iloc[:, category+num_categories].astype(int) == 1)).astype(int)
+  df[tn] = ((df.iloc[:, category] == 0) & (df.iloc[:, category+num_categories].astype(int) == 0)).astype(int)
+  df[fp] = ((df.iloc[:, category] == 0) & (df.iloc[:, category+num_categories].astype(int) == 1)).astype(int)
+  df[fn] = ((df.iloc[:, category] == 1) & (df.iloc[:, category+num_categories].astype(int) == 0)).astype(int)
+  
+  return df
+
+def performance_metrics(col_names, df):
+  """
+  Calculates performance metrics (accuracy, precision, recall, and f1) for every category.
+
+  col_names:
+    Category names to be annotated
+  df:
+    Input dataframe (text_to_annotate)
+
+  Returns:
+    Dataframe with performance metrics
+  """
+
+  # Initialize lists to store the metrics
+  categories_names = col_names[1:]
+  categories = [index for index, string in enumerate(categories_names)]
+  metrics = ['accuracy', 'precision', 'recall', 'f1']
+  accuracy_list = []
+  precision_list = []
+  recall_list = []
+  f1_list = []
+
+  # Calculate the metrics for each category and store them in the lists
+  for cat in categories:
+      tp = df['tp_' + str(cat+1)].sum()
+      tn = df['tn_' + str(cat+1)].sum()
+      fp = df['fp_' + str(cat+1)].sum()
+      fn = df['fn_' + str(cat+1)].sum()
+      # Check which one is not a number
+      if np.isnan(tp):
+        print("tp issue")
+      if np.isnan(tn):
+        print("tn issue")
+      if np.isnan(fp):
+        print("tn issue")
+      if np.isnan(fn):
+        print("tn issue")
+
+      accuracy = (tp + tn) / (tp + tn + fp + fn)
+
+      if tp + fp == 0: # include to account for undefined denominator
+        precision = 0
+      else:
+        precision = tp / (tp + fp)
+
+      if tp + fn == 0: # include to account for undefined denominator
+        recall = 0
+      else:
+        recall = tp / (tp + fn)
+
+      if precision + recall == 0: # include to account for undefined denominator
+        f1 = 0 
+      else:
+        f1 = (2 * precision * recall) / (precision + recall)
+
+      # append metrics
+      accuracy_list.append(accuracy)
+      precision_list.append(precision)
+      recall_list.append(recall)
+      f1_list.append(f1)
+
+  # Create a dataframe to store the results
+  results = pd.DataFrame({
+      'Category': categories_names,
+      'Accuracy': accuracy_list,
+      'Precision': precision_list,
+      'Recall': recall_list,
+      'F1': f1_list
+  })
+
+  return results
+
+def filter_incorrect(df):
+    """
+    In order to better understand LLM performance, this function returns a df for all incorrect 
+    classifications and all classificatiosn with less than 1.0 consistency.
+
+    df:
+      Input dataframe (text_to_annotate)
+
+    Returns:
+      Dataframe with incorrect or less than 1.0 consistency scores.
+    """
+
+    # Filter rows where any consistency score column value is 1.0
+    consistency_cols = [col for col in df.columns if 'consistency' in col]
+    consistency_filter = df[consistency_cols] == 1 
+
+    # Filter rows where any correct column value is 1
+    correct_cols = [col for col in df.columns if 'correct' in col]
+    correct_filter = df[correct_cols] == 1
+
+    # Combine filters
+    combined_filter = pd.concat([consistency_filter, correct_filter], axis=1)
+    # Filter for any rows where the correct value is not 1 or the consistency is less than 1.0
+    mask = combined_filter.apply(lambda x: any(val == False for val in x), axis=1)
+
+    # Apply the filter and return the resulting dataframe
+    return df[mask]
 
 def num_tokens_from_string(string: str, encoding_name: str):
     """Returns the number of tokens in a text string."""
@@ -582,7 +773,7 @@ def estimate_time_cost(text_to_annotate, codebook, llm_query,
                        model, num_iterations, num_batches, batch_size, col_names):
   """
   This function estimates the cost and time to run gpt_annotate().
-
+  It is depreciated for application with GPT-4o
   text_to_annotate:
     Input data that will be annotated.
   codebook:
