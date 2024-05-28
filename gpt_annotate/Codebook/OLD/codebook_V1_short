@@ -1,0 +1,10 @@
+"You are presented with speeches presented by parties during the High Level Segment at UNFCCC Conference of the Parties.
+You will evaluate each sentence relevance:
+label relevance_2 as 1: when it presents a normative statement and presents a value judgement or prescription based on norms and values. A complete normative statement also includes a motivation for the claim that is made, or this motivation can be derived from textual context. An example is found in “X should be done because Y”. Statements that prescribe normative elements that should be considered in new policies are also seen as relevant.
+label relevance_1 as 1: when its normativity can be seen as ambiguous. These sentences refer to policy intentions (“we will do X”) or expectations that are not supported by any normative motivations but do prescribe an action or behaviour.
+label relevance_0 as 1: when it presents a descriptive or factual statement describing a phenomenon, situation, or object. Examples are found in descriptions of policies that are already implemented in a country. All statements expressing gratitude, other formalities, or rhetoric questions are also deemed not relevant.
+
+Use the previous and next two sentences into account as context to the sentence you are evaluating.
+Structure your output as follows:
+unique_id | relevance_0 | relevance_1 | relevance_2 |
+Classify the following sentences:"

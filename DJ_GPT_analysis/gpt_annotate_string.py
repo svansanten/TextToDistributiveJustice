@@ -46,7 +46,7 @@ import os
 
 # Create a global fingerprint dataframe
 fingerprints = pd.DataFrame()
-missed_batches = pd.DataFrame()
+missed_batches = []
 def prepare_data(text_to_annotate, codebook, key,
                  prep_codebook = False, human_labels = True, no_print_preview = False):
 
@@ -208,6 +208,10 @@ def gpt_annotate(text_to_annotate, codebook, key, seed, fingerprint, experiment,
 
   from openai import OpenAI
 
+  #get global dataframes
+  global fingerprints
+  global missed_batches
+
   client = OpenAI(
     api_key=key,
     )
@@ -235,6 +239,7 @@ def gpt_annotate(text_to_annotate, codebook, key, seed, fingerprint, experiment,
   ### Nested for loop for main function
   # Iterate over number of classification iterations
   for j in range(num_iterations):
+    print(f'{seed} - iteration {j+1}')
     # Iterate over number of batches
     for i in range(num_batches):
       # Based on batch, determine starting row and end row
@@ -285,14 +290,11 @@ def gpt_annotate(text_to_annotate, codebook, key, seed, fingerprint, experiment,
 
       # add iteration annotation results to output df - if standard fingerprint is used
       if response.system_fingerprint == fingerprint:
-        print(f'Seed: {seed}: Iteration {j+1}, batch {i+1}: fingerprintmatch found!')
         out = pd.concat([out, text_df_out])
       else:
-        missed_batch = f'{seed} - I{j+1} - B{i+1}'
-        print(f'{missed batch}: fingerprint does not match')
-        global missed_batches  # Access the global DataFrame
-        new_row = pd.DataFrame({"Missed batch": [missed_batch]})
-        missed_batches = pd.concat([missed_batch, new_row], ignore_index=True)
+        missed_batch = f'{seed} - I{j + 1} - B{i + 1}'
+        print(missed_batch, "fingerprint does not match")
+        missed_batches.append(missed_batch)
 
       time.sleep(.5)
     # print status report  
@@ -317,12 +319,11 @@ def gpt_annotate(text_to_annotate, codebook, key, seed, fingerprint, experiment,
   out_all.to_csv(f'STRING_RESULT/{experiment}/all_iterations/all_iterations_string_T{temperature}_{seed}.csv',index=False)
 
   # OUTPUT: Save fingerprints dataframe to CSV - final dataframe includes all seeds
-  global fingerprints
   fingerprints.to_csv(f'STRING_RESULT/{experiment}/T{temperature}_fingerprints_all.csv')
 
   # OUTPUT: save missed batches dataframe to CSV
-  global missed_batches
-  missed_batches.to_csv(f'STRING_RESULT/{experiment}/T{temperature}_missed_batches.csv')
+  missed_batches_df = pd.DataFrame(missed_batches, columns=['Missed batch'])
+  missed_batches_df.to_csv(f'STRING_RESULT/{experiment}/T{temperature}_missed_batches.csv')
 
 
   return out_all

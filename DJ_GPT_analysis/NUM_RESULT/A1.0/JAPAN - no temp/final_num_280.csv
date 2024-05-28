@@ -1,0 +1,38 @@
+unique_id,text,relevance_0_true,relevance_1_true,relevance_2_true,relevance_0_pred,relevance_1_pred,relevance_2_pred,consistency_relevance_0,consistency_relevance_1,consistency_relevance_2,correct_1,tp_1,tn_1,fp_1,fn_1,correct_2,tp_2,tn_2,fp_2,fn_2,correct_3,tp_3,tn_3,fp_3,fn_3
+0," Thank you, Mr. President .",1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+1," On beha lf of the government of Japan , I would like to express my sinc ere appr eciation to His Excellency , Minister Marcin Korolec and his government for hosting the COP 19 presidency .",1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+2, I would also like to expr ess my d eepest condolence to the people of the Philippines and other countries who have been suffering from the r ecent typhoon.,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+3, Mr. President:  A fair and effective framework with the participation of all countries needs to be adopted at COP 21 in 2015 to ensure emissions reduction at the global level .,0,0,1,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1
+4," In this regard, Japan firmly supports the establishment of a post-2020 framework. ",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+5,Such a framework must be based on “nationally -determined” commitment and an effective international transparency mechanism.,0,0,1,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1
+6, I will devote myself toward the s uccessful outcome at this COP19 .,0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+7, Mr. President:  The Great East Japan Earthquake and n uclear Power Plant’ s Accident in March 2011 caused drastic changes in the energy situations .,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+8, Even under such circumstance both the public and private sectors of Japan have made utmost efforts to address climate change.,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+9, Our greenhouse gas emissions for the first commitme nt period is forecasted to be 8.2 percent lower compared to the base year. ,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+10,"As a result, our target under the Kyoto Protocol of 6 percent reduction has been achieved.",1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+11," As the next step, Japan has set a target to reduce emissions by 3.8 percent compared to the 2005 level in 2020.  ",1,0,0,0.0,1.0,0.0,1.0,1.0,1.0,0,0,0,0,1,0,0,0,1,0,1,0,1,0,0
+12, This target may appear to be less ambitious.,1,0,0,0.0,1.0,0.0,1.0,1.0,1.0,0,0,0,0,1,0,0,0,1,0,1,0,1,0,0
+13," However, this is an ambitious target .",1,0,0,0.0,0.0,1.0,1.0,1.0,1.0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,0
+14, It requires Japan to improve its energy efficiency by 20 percent when it is already at the world’s top level .,1,0,0,0.0,0.0,1.0,1.0,1.0,1.0,0,0,0,0,1,1,0,1,0,0,0,0,0,1,0
+15, This is a target for the time being.,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+16, It was determined without taking into account the emissions reduction effect by nuclear power.,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+17, Consideration is underway on energy policy .,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+18, We will conduct further review in line with its progress .,0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+19," And then, a firm target will eventually be set .",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+20, Japan will establish a low carbon society through various policy tools.,0,1,0,0.0,0.0,0.0,2.0,1.0,1.0,1,0,1,0,0,0,0,0,0,1,1,0,1,0,0
+21, We will strategically promote mitigation measures .,0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+22," We will enhance development and demonstration of renewable energy -related technologies such as offshore wind power, geothermal power and rechargeable batteries .",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+23, Japan is hosting the IPCC session next March.,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+24," Using that opportunity, we will launch a new public awareness campaign to further encourage low-carbon lifestyles.",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+25, Mr. President:  Japan reaffirms the goal to reduce emissions by 50 percent at the global level and by 80 percent in the developed world by 2050.,0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+26, Now is the time for Japan to take “ Actions for a Cool Earth” as advocated by Prime Minister Shinzo Abe.,0,1,0,0.0,0.0,1.0,1.0,1.0,1.0,1,0,1,0,0,0,0,0,0,1,0,0,0,1,0
+27,"First, Japan will promote further technological innovation . ",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+28," In this context, Japan’s public and private sectors plan to invest a total of 110 billion US dollars domestically over the next five years.",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+29,"Second, Japan will promote the application of Japanese low-carbon.",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+30," In so doing , we will contribute to global emission s reductions through the use of the Joint Crediting Mechanism, or JCM .",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+31," Furthermore, Japan will strengthen its partner ships with countries and stakeholders.",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+32," We will provide support to developing countries totaling 1.6 trillion yen, about 16 billion US dollars, during the 3-year period from 201 3 to 201 5.",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+33," We will mobiliz e official development assistance, other official flows, and private finance in the field of mitigation and adaptation.",0,1,0,0.0,1.0,0.0,1.0,1.0,1.0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0
+34, Tokyo has been selected as the host of the 2020 Summer Olympics and Paralympics.,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
+35," Through the Olympic Games , we will demonstrate to the world a society with low carbon foot print, a society in harmony with nature and a society based on sound material cycle.",0,1,0,0.0,0.0,1.0,1.0,1.0,1.0,1,0,1,0,0,0,0,0,0,1,0,0,0,1,0
+36, Thank you for your kind attention.,1,0,0,1.0,0.0,0.0,1.0,1.0,1.0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0
