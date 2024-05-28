@@ -8,11 +8,11 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 53,Global warming is a catastrophic problem that needs a global solution.,utilitarian,"53 Global warming is a catastrophic problem that needs a global solution.
 ",utilitarian,1
 54,"Therefore, the multilateralism approach remains the fundamental approach in fighting climate change.",general normative statement,"54 Therefore, the multilateralism approach remains the fundamental approach in fighting climate change.
-",utilitarian,1
+",general normative statement,1
 55,"In this view, we urge developed country parties to respect and adhere to the principles and provisions of the UNFCCC.",utilitarian,"55 In this view, we urge developed country parties to respect and adhere to the principles and provisions of the UNFCCC.
 ",egalitarian,1
 56,"We also call on Annex-1 Parties to the Convention to avoid procrastination and urgently implement the commitments made so far, in line scientific findings of the IPCC.",utilitarian,"56 We also call on Annex-1 Parties to the Convention to avoid procrastination and urgently implement the commitments made so far, in line scientific findings of the IPCC.
-",egalitarian,1
+",general normative statement,1
 58,"As a country committed to address the adverse effects of climate change, Namibia is ready to increase its mitigation efforts provided that sufficient financial and technical support is provided.",sufficientarian,"58 As a country committed to address the adverse effects of climate change, Namibia is ready to increase its mitigation efforts provided that sufficient financial and technical support is provided.
 ",prioritarian,1
 60,This Platform should not be misinterpreted to fit the interests of some.,general normative statement,"60 This Platform should not be misinterpreted to fit the interests of some.
@@ -26,7 +26,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 70,"Therefore, it is the hope of the citizens of the world that 19 years down the line, we should have better addressed the challenges and well equipped ourselves to better deal with climate change.",utilitarian,"70 Therefore, it is the hope of the citizens of the world that 19 years down the line, we should have better addressed the challenges and well equipped ourselves to better deal with climate change.
 ",utilitarian,1
 72,"The Green Climate Fund, which we regarded as an ideal beginning to address the finance aspect for climate change remainsdry.",prioritarian,"72 The Green Climate Fund, which we regarded as an ideal beginning to address the finance aspect for climate change remainsdry.
-",sufficientarian,1
+",general normative statement,1
 78,"The cost of inaction to, adequately, address climate change will haunt us all.",general normative statement,"78 The cost of inaction to, adequately, address climate change will haunt us all.
 ",utilitarian,1
 79,"The time to take meaningful and proactive steps against the adverse impacts of climate change is now, here in Warsaw.",general normative statement,"79 The time to take meaningful and proactive steps against the adverse impacts of climate change is now, here in Warsaw.
@@ -46,7 +46,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 126,"We believe that, Nationally Appropriate Mitigation Actions (NAMAs) will fully operationalized with strong supports provided by the Annex I countries under the non market mechanism one.",prioritarian,"126 We believe that, Nationally Appropriate Mitigation Actions (NAMAs) will fully operationalized with strong supports provided by the Annex I countries under the non market mechanism one.
 ",egalitarian,1
 130,"We must also take decisions on finance, technology and capacity building to supportadaptation and mitigation measures.",general normative statement,"130 We must also take decisions on finance, technology and capacity building to supportadaptation and mitigation measures.
-",utilitarian,1
+",prioritarian,1
 131,"We urge parties to take decisions on simplificationof mechanism and procedures for both CDM and accessing climate finance bydeveloping country parties with recognizing of the country ownership, direct access andtransparency principles.",prioritarian,"131 We urge parties to take decisions on simplificationof mechanism and procedures for both CDM and accessing climate finance bydeveloping country parties with recognizing of the country ownership, direct access andtransparency principles.
 ",prioritarian,1
 132,"It is also important to identify source of long term finance thatcould be from public finance of Annex I country parties, as well as seeking clarity of thestatus of fast start financing.",general normative statement,"132 It is also important to identify source of long term finance thatcould be from public finance of Annex I country parties, as well as seeking clarity of thestatus of fast start financing.
@@ -60,19 +60,19 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 136,"In this regard, developed country parties should take the lead, including finance,technology and capacity building for developing countries to address adaptationmeasures.",prioritarian,"136 In this regard, developed country parties should take the lead, including finance,technology and capacity building for developing countries to address adaptationmeasures.
 ",prioritarian,1
 138,"Apart from that, we requestdeveloped country parties to reduce their emissions by at least 45% below 1990 levelsin 2020 and 80-95% by 2050.",general normative statement,"138 Apart from that, we requestdeveloped country parties to reduce their emissions by at least 45% below 1990 levelsin 2020 and 80-95% by 2050.
-",utilitarian,1
+",egalitarian,1
 139,"In addition, major developing countries must also reducetheir emissions through National Appropriate Mitigation Actions (NAMAs) and other formof mitigation actions.",general normative statement,"139 In addition, major developing countries must also reducetheir emissions through National Appropriate Mitigation Actions (NAMAs) and other formof mitigation actions.
-",utilitarian,1
+",egalitarian,1
 140,"Our future generation will proud of us, if we are willing to stop their furure through a consensus and right decision we made here, in Warsaw.",utilitarian,"140 Our future generation will proud of us, if we are willing to stop their furure through a consensus and right decision we made here, in Warsaw.
 ",utilitarian,1
 142,"As Pope Francis said in his Message to ourConference, the issues we are debating “affects all humanity, especially the poor andfuture gencrations: [...] it is a serious ethical and moral responsibility [...] ‘There is aclear, definite and urgent cthical imperative to act |...) We can only find adequatesolutions if we act together”.",utilitarian,"142 As Pope Francis said in his Message to ourConference, the issues we are debating “affects all humanity, especially the poor andfuture gencrations: [...] it is a serious ethical and moral responsibility [...] ‘There is aclear, definite and urgent cthical imperative to act |...) We can only find adequatesolutions if we act together”.
 ",utilitarian,1
 143,"The longer we wait, the more it will cost; more victims will suffer from our inaction andthe greatest weight will fall on the most vuinerable, the poorest peoples and futuregenerations: what is at issuc here is respect for their fundamental human rights.",sufficientarian,"143 The longer we wait, the more it will cost; more victims will suffer from our inaction andthe greatest weight will fall on the most vuinerable, the poorest peoples and futuregenerations: what is at issuc here is respect for their fundamental human rights.
-",prioritarian,1
+",sufficientarian,1
 148,"The Holy See’s Delegation has repeatedly called for a clear and firm political will toagree on tangible and concrete action, and has urged the adoption of common bindingmeasures and adequate budgcts for cffective and sustainable action on mitigation andadaptation, as well as on sharing technologies and know-how.",egalitarian,"148 The Holy See’s Delegation has repeatedly called for a clear and firm political will toagree on tangible and concrete action, and has urged the adoption of common bindingmeasures and adequate budgcts for cffective and sustainable action on mitigation andadaptation, as well as on sharing technologies and know-how.
 ",utilitarian,1
 156,"There is no room for the globalization of indifference, the economy of exclusion or the throwaway culture so foten denounced by Pope Francis.",egalitarian,"156 There is no room for the globalization of indifference, the economy of exclusion or the throwaway culture so foten denounced by Pope Francis.
-",egalitarian,1
+",general normative statement,1
 157,"Pope Francis warns that “the effective fight against global warming is only possiblethrough a responsible collective response, that overcomes particular interests andbehaviors and develops itself free from political and economic pressures.",utilitarian,"157 Pope Francis warns that “the effective fight against global warming is only possiblethrough a responsible collective response, that overcomes particular interests andbehaviors and develops itself free from political and economic pressures.
 ",utilitarian,1
 158,"A collectiveresponse that is also capable of contrasting attitudes of distrust and promote a culture ofsolidarity, encounter and dialogue; able to act responsibility to protect the planct and thehuman family”, ensuring that present and future generations have the possibility of livingin a safe and worthy environment.",utilitarian,"158 A collectiveresponse that is also capable of contrasting attitudes of distrust and promote a culture ofsolidarity, encounter and dialogue; able to act responsibility to protect the planct and thehuman family”, ensuring that present and future generations have the possibility of livingin a safe and worthy environment.
@@ -96,9 +96,9 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 181," COP 20/CMP 10 present an opportunity for us to make bold and comprehensive decision s for a safe r Planet, its people and their livelihoods.",utilitarian,"181  COP 20/CMP 10 present an opportunity for us to make bold and comprehensive decision s for a safe r Planet, its people and their livelihoods.
 ",utilitarian,1
 184,"The Agreement must address all the elements of mitigation, adaptation, finance, technology, capacity -building, transparency of action, and support in a comprehensive and balanced manner without om itting the aspects of loss and damage .",general normative statement,"184 The Agreement must address all the elements of mitigation, adaptation, finance, technology, capacity -building, transparency of action, and support in a comprehensive and balanced manner without om itting the aspects of loss and damage .
-",utilitarian,1
+",general normative statement,1
 186,The INDCs must reflect the efforts Parties are willing to contribute towards the enhanced implementation of their obligations under the convention as enshrined in its Article 4.,egalitarian,"186 The INDCs must reflect the efforts Parties are willing to contribute towards the enhanced implementation of their obligations under the convention as enshrined in its Article 4.
-",egalitarian,1
+",general normative statement,1
 187, Enhancing the pre -2020 ambition is critical to keep us on track to a below two degree temperature rise ; and to help build necessary trust and confidence for a meaningful 2015 Agreement.,utilitarian,"187  Enhancing the pre -2020 ambition is critical to keep us on track to a below two degree temperature rise ; and to help build necessary trust and confidence for a meaningful 2015 Agreement.
 ",utilitarian,1
 188,"Developed countries should take the lead in increasing their mitigation ambition, and providing enhanced support for developing countries to incre ase their ambition.",prioritarian,"188 Developed countries should take the lead in increasing their mitigation ambition, and providing enhanced support for developing countries to incre ase their ambition.
@@ -106,7 +106,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 192," I also welcome , and indeed recognise pledges by some developed countr y-Part ies to the Green Climate Fund and urge for more accelerated action to ensure its full capitalization .",prioritarian,"192  I also welcome , and indeed recognise pledges by some developed countr y-Part ies to the Green Climate Fund and urge for more accelerated action to ensure its full capitalization .
 ",prioritarian,1
 197," Lastly distinguished Ladies and Gentlemen, A m eaningful outcome from this conference is critical in enhancingthe multilateral rules based regime under the UNFCCC .",egalitarian,"197  Lastly distinguished Ladies and Gentlemen, A m eaningful outcome from this conference is critical in enhancingthe multilateral rules based regime under the UNFCCC .
-",utilitarian,1
+",general normative statement,1
 204, We need to build on this momentum and answer these calls by taking action.,general normative statement,"204  We need to build on this momentum and answer these calls by taking action.
 ",utilitarian,1
 211," [Global agreement ]  But actions by a partial number of countries will not be sufficient to address climate change , and coordinated international response is essenti al.",egalitarian,"211  [Global agreement ]  But actions by a partial number of countries will not be sufficient to address climate change , and coordinated international response is essenti al.
@@ -120,11 +120,11 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 223,"  Last but not least, t he agreement should also lay solid foundation for transparency and accountability with a clear set of rules .",general normative statement,"223   Last but not least, t he agreement should also lay solid foundation for transparency and accountability with a clear set of rules .
 ",general normative statement,1
 226, Let us REBUILD confidence in international response to climate change ; RENEW our commitments to take action; and  REVITALIZE hope for our common future.,utilitarian,"226  Let us REBUILD confidence in international response to climate change ; RENEW our commitments to take action; and  REVITALIZE hope for our common future.
-",utilitarian,1
+",general normative statement,1
 243,"With only 0.01 % of global emissions produced by the Pacific as a region, Tonga  understands that we co -exist in a Global Commons, and that as a global family we  must foster global partnerships as a measure to catalyze global ambitions.",utilitarian,"243 With only 0.01 % of global emissions produced by the Pacific as a region, Tonga  understands that we co -exist in a Global Commons, and that as a global family we  must foster global partnerships as a measure to catalyze global ambitions.
 ",egalitarian,1
 244,"Yet, in light of our limited human resources, and economic capacity, we as one of the worlds most vulnerable countries, have no alternative but to leave no stone unturned, or leave anything to chance, and spare no expense , because no monetary value can be ascribed to ‘one’s ri ght to exist’.",sufficientarian,"244 Yet, in light of our limited human resources, and economic capacity, we as one of the worlds most vulnerable countries, have no alternative but to leave no stone unturned, or leave anything to chance, and spare no expense , because no monetary value can be ascribed to ‘one’s ri ght to exist’.
-",prioritarian,1
+",sufficientarian,1
 245,"It is in this context , that the Government and the people of the Kingdom of Tonga urge world leaders to revise their development strategies by taking up the challenge of adopting and reverting to more sustainable means for develop ment, which is key to ensuring a sustainable and cleaner future for all.",utilitarian,"245 It is in this context , that the Government and the people of the Kingdom of Tonga urge world leaders to revise their development strategies by taking up the challenge of adopting and reverting to more sustainable means for develop ment, which is key to ensuring a sustainable and cleaner future for all.
 ",utilitarian,1
 247,"Chair, al low me to call on world leaders to seek solutions that focus on  accelerating actions and increasing ambition and to also take concrete action  nationally and in doing so we may discontinue existing in this ‘Tragedy of t he  Commons’  16.",utilitarian,"247 Chair, al low me to call on world leaders to seek solutions that focus on  accelerating actions and increasing ambition and to also take concrete action  nationally and in doing so we may discontinue existing in this ‘Tragedy of t he  Commons’  16.
@@ -138,7 +138,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 281,"At the same time the Adaptation Fund is an important funding mechanism to our region, and we call for continued support, including the 80 million dollars that has been requested to ensur e that the AF remains operational.",prioritarian,"281 At the same time the Adaptation Fund is an important funding mechanism to our region, and we call for continued support, including the 80 million dollars that has been requested to ensur e that the AF remains operational.
 ",prioritarian,1
 290,This is a grave responsibility and we must act with the urgency it demands.,prioritarian,"290 This is a grave responsibility and we must act with the urgency it demands.
-",utilitarian,1
+",general normative statement,1
 293,It is imperative that the work ahead places clear focus and priority on particularly vulnerable developing countries supported by partners as it is set out in Article 4 of the Convention.,prioritarian,"293 It is imperative that the work ahead places clear focus and priority on particularly vulnerable developing countries supported by partners as it is set out in Article 4 of the Convention.
 ",prioritarian,1
 296,"Pacific island countries, therefore, view as mandatory that the long -term global temperature rise does not exceed 1.5 degrees Celsius and that mitigation ambition accurately reflects the long -term global goal.",utilitarian,"296 Pacific island countries, therefore, view as mandatory that the long -term global temperature rise does not exceed 1.5 degrees Celsius and that mitigation ambition accurately reflects the long -term global goal.
@@ -148,7 +148,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 299,"It is essential that resource mobilization, support and building the capacity at the national and regional levels to address the issues related to loss and damage continues by establishing a financial facility to complement the work of the Executive Committee as it implements its work plan.",prioritarian,"299 It is essential that resource mobilization, support and building the capacity at the national and regional levels to address the issues related to loss and damage continues by establishing a financial facility to complement the work of the Executive Committee as it implements its work plan.
 ",prioritarian,1
 315,"We therefore call for action by the COP to e nsure that this review is completed in a timely manner so that it can inform parties in making their INDCs, and in informing our decision making in Paris.",general normative statement,"315 We therefore call for action by the COP to e nsure that this review is completed in a timely manner so that it can inform parties in making their INDCs, and in informing our decision making in Paris.
-",utilitarian,1
+",general normative statement,1
 319,We would urge development partners to support SIDS in improving their observation networks and establish new monitoring stations.,prioritarian,"319 We would urge development partners to support SIDS in improving their observation networks and establish new monitoring stations.
 ",prioritarian,1
 320,"In this regard, the work of WMO on GFCS is welcomed, and again we call for development partners to utilize this framework to assist SIDS with enhancing their observation systems, including for ocean acidification.",prioritarian,"320 In this regard, the work of WMO on GFCS is welcomed, and again we call for development partners to utilize this framework to assist SIDS with enhancing their observation systems, including for ocean acidification.
@@ -166,7 +166,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 337,"Therefore, let us be bold and take that step for Humanity and for Life itself! ",utilitarian,"337 Therefore, let us be bold and take that step for Humanity and for Life itself! 
 ",utilitarian,1
 343,"In that regard, we expect further and stronger support fromthe European Union, whose efforts we fully support in thenegotiation process.",prioritarian,"343 In that regard, we expect further and stronger support fromthe European Union, whose efforts we fully support in thenegotiation process.
-",prioritarian,1
+",general normative statement,1
 348,"We have come to Paris convinced that, on the basis of compromise and consensus, a fair agreement will be reached,which should be effective, binding to all countries, with aclearly highlighted common and shared responsibility toreduce emissions of greenhouse gases, but also with aprecisely defined relation between developed and lessdeveloped countries.",egalitarian,"348 We have come to Paris convinced that, on the basis of compromise and consensus, a fair agreement will be reached,which should be effective, binding to all countries, with aclearly highlighted common and shared responsibility toreduce emissions of greenhouse gases, but also with aprecisely defined relation between developed and lessdeveloped countries.
 ",egalitarian,1
 358,We owe this to the outside world: our citizens and our children.,utilitarian,"358 We owe this to the outside world: our citizens and our children.
@@ -230,7 +230,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 556," If we want to stand a chance to meet these objective s, we will all have to step up our efforts significantly.",egalitarian,"556  If we want to stand a chance to meet these objective s, we will all have to step up our efforts significantly.
 ",general normative statement,1
 570,"We should make the most of these opportunities by developing and implementing innovative solutions, enabling our businesses to contribute to, and benefit from, the global transition towards a carbon -neutral economy .",libertarian,"570 We should make the most of these opportunities by developing and implementing innovative solutions, enabling our businesses to contribute to, and benefit from, the global transition towards a carbon -neutral economy .
-",utilitarian,1
+",libertarian,1
 582,The consequences of global warming has a direct healtheffect and the health of this and our future generations depends onthe actions we take now!,utilitarian,"582 The consequences of global warming has a direct healtheffect and the health of this and our future generations depends onthe actions we take now!
 ",utilitarian,1
 593,It is of great importance for the benefit of all mankind to secure thesustainability of our forests and its rich biodiversity.,utilitarian,"593 It is of great importance for the benefit of all mankind to secure thesustainability of our forests and its rich biodiversity.
@@ -238,7 +238,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 594,"In this regard, itis our firm opinion that the international community has a moralobligation towards Suriname for its contribution to the mitigation ofclimate change.",general normative statement,"594 In this regard, itis our firm opinion that the international community has a moralobligation towards Suriname for its contribution to the mitigation ofclimate change.
 ",prioritarian,1
 610,"This is anenormous task, but we need to see more ambition on climate action across theworld.",general normative statement,"610 This is anenormous task, but we need to see more ambition on climate action across theworld.
-",utilitarian,1
+",general normative statement,1
 613,"Mr President, We urge all Parties to work in the Talanoa spirit of solidarity andcooperation moving forward.",egalitarian,"613 Mr President, We urge all Parties to work in the Talanoa spirit of solidarity andcooperation moving forward.
 ",egalitarian,1
 614,We believe that rapid implementation of the ParisAgreement is of existential importance.,utilitarian,"614 We believe that rapid implementation of the ParisAgreement is of existential importance.
@@ -252,13 +252,13 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 625,"We insist that climate action needs adequate, reliable, long-term finance support.",prioritarian,"625 We insist that climate action needs adequate, reliable, long-term finance support.
 ",sufficientarian,1
 627,"The targeted 100 billion USD per year ofpublic sector finance must urgently be mobilized for climate adaptation,mitigation and loss & damage actions, ensuring simplified access for developingcountry Parties.",prioritarian,"627 The targeted 100 billion USD per year ofpublic sector finance must urgently be mobilized for climate adaptation,mitigation and loss & damage actions, ensuring simplified access for developingcountry Parties.
-",sufficientarian,1
+",prioritarian,1
 629,"Vanuatu embraces the vision of global climate action that actively promoteshuman rights, gender equality and sustainable development for all Parties.",egalitarian,"629 Vanuatu embraces the vision of global climate action that actively promoteshuman rights, gender equality and sustainable development for all Parties.
 ",egalitarian,1
 630,"To borrow a phrase from the Peoples’ Climate March: to change everything, weneed everyone.",egalitarian,"630 To borrow a phrase from the Peoples’ Climate March: to change everything, weneed everyone.
 ",egalitarian,1
 632,"Your Excellency, COP President, thisis a great opportunity for the Pacific, we, the small island developing states needunited leadership now for an ambitious outcome of this Islands COP, we surviveor we sink together.",prioritarian,"632 Your Excellency, COP President, thisis a great opportunity for the Pacific, we, the small island developing states needunited leadership now for an ambitious outcome of this Islands COP, we surviveor we sink together.
-",prioritarian,1
+",egalitarian,1
 647,"Therefore, Indonesia would like to urge our d eveloped country par tners , to meet their pre -2020 commitment , and to rapidly increase their ambition in meeting the objectives of the Paris Agreement , both in emission reduction and in providing means of implementation , to developing countries .",prioritarian,"647 Therefore, Indonesia would like to urge our d eveloped country par tners , to meet their pre -2020 commitment , and to rapidly increase their ambition in meeting the objectives of the Paris Agreement , both in emission reduction and in providing means of implementation , to developing countries .
 ",prioritarian,1
 650,"Indonesia , would like to see fair and just international policies that are conducive for both international and national interests.",egalitarian,"650 Indonesia , would like to see fair and just international policies that are conducive for both international and national interests.
@@ -276,7 +276,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 680,We need to replace selfish consumerism with a sharing philosophy.,egalitarian,"680 We need to replace selfish consumerism with a sharing philosophy.
 ",egalitarian,1
 682,Only by changing the habits of our hearts will we start changing the heart of the unsustainable global energy system.,general normative statement,"682 Only by changing the habits of our hearts will we start changing the heart of the unsustainable global energy system.
-",general normative statement,1
+",utilitarian,1
 690,"It is necessary for the health of the people, especially the most vulnerable categories.",prioritarian,"690 It is necessary for the health of the people, especially the most vulnerable categories.
 ",prioritarian,1
 691,"So, our permanent commitment must be green growth and development and lower carbon emissions.",prioritarian,"691 So, our permanent commitment must be green growth and development and lower carbon emissions.
@@ -288,9 +288,9 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 707,This is climate injustice against humanity.,utilitarian,"707 This is climate injustice against humanity.
 ",general normative statement,1
 728,"All forms of finance – public and private, domestic and international – are essential and they should be seen as complementary and mutually reinforcing Finance must be coupled wi th relevant technology tran sfer and capacity building for implementation of ambitious emission reduction targets.",general normative statement,"728 All forms of finance – public and private, domestic and international – are essential and they should be seen as complementary and mutually reinforcing Finance must be coupled wi th relevant technology tran sfer and capacity building for implementation of ambitious emission reduction targets.
-",utilitarian,1
+",egalitarian,1
 730,"However, we also require political will and commitment by the international comm unity to achieve the objectives and targets we have all set and agreed in the various Climate Change Treaties.",general normative statement,"730 However, we also require political will and commitment by the international comm unity to achieve the objectives and targets we have all set and agreed in the various Climate Change Treaties.
-",general normative statement,1
+",egalitarian,1
 752,"Despite these positive developments on our part, international climate finance is not yet at the required scale, particularly for adaptation, and remains difficult to access for the most climate vulnerable countries.",prioritarian,"752 Despite these positive developments on our part, international climate finance is not yet at the required scale, particularly for adaptation, and remains difficult to access for the most climate vulnerable countries.
 ",prioritarian,1
 753,"We call on develop ed countries to increase their contributions to financial mechanisms under the Convention, including GCF, LDCF and the Adaptation Fund.",prioritarian,"753 We call on develop ed countries to increase their contributions to financial mechanisms under the Convention, including GCF, LDCF and the Adaptation Fund.
@@ -320,7 +320,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 846,Finance: It is critical that climate finance remains high on the agenda in this COP.,general normative statement,"846 Finance: It is critical that climate finance remains high on the agenda in this COP.
 ",utilitarian,1
 853,"To this end, consideration of the Loss and Damage is critical and therefore the need to finalise the WIM On Markets: We welcome the significant progress made over the years, on all major issues related to Article 6.",prioritarian,"853 To this end, consideration of the Loss and Damage is critical and therefore the need to finalise the WIM On Markets: We welcome the significant progress made over the years, on all major issues related to Article 6.
-",general normative statement,1
+",prioritarian,1
 854,"However as we finalise the rules for markets and non market mechanisms, we call the need to maintain environmental integrity, ensure adaptation mechanisms are an intergral part of article 6 and move beyond pure offsetting of emissions and deliver overall mitigation in global emissions, avoid double counting, not allow the carryover of pre-2020 Kyoto units to the Paris Agreement or other accounting loopholes, and deliver a share of proceeds from the market mechanisms for the Adaptation Fund",egalitarian,"854 However as we finalise the rules for markets and non market mechanisms, we call the need to maintain environmental integrity, ensure adaptation mechanisms are an intergral part of article 6 and move beyond pure offsetting of emissions and deliver overall mitigation in global emissions, avoid double counting, not allow the carryover of pre-2020 Kyoto units to the Paris Agreement or other accounting loopholes, and deliver a share of proceeds from the market mechanisms for the Adaptation Fund
 ",utilitarian,1
 868,We need to mobilize and deploy the promised $100bn and the trillions needed to support developing co untries.,prioritarian,"868 We need to mobilize and deploy the promised $100bn and the trillions needed to support developing co untries.
@@ -330,7 +330,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 870,We acknowledge that the transformation that is required will have its challenges and call for a just transition that leaves no one behind.,sufficientarian,"870 We acknowledge that the transformation that is required will have its challenges and call for a just transition that leaves no one behind.
 ",sufficientarian,1
 872,"But let’s be absolutely clear - we cannot leave Glasgow without having done enough to keep the 1.5 goal within reach, and satisfactory outcomes on adaption and finance.",utilitarian,"872 But let’s be absolutely clear - we cannot leave Glasgow without having done enough to keep the 1.5 goal within reach, and satisfactory outcomes on adaption and finance.
-",utilitarian,1
+",sufficientarian,1
 875,"  We must seize this opportunity to show that we have the courage to take the decisive, ambitious and urgent actions that we all know are so desperately needed……...I thank you.",utilitarian,"875   We must seize this opportunity to show that we have the courage to take the decisive, ambitious and urgent actions that we all know are so desperately needed……...I thank you.
 ",utilitarian,1
 895, It’s time that we do some actual work on the ground and build a framework for climate justice.,egalitarian,"895  It’s time that we do some actual work on the ground and build a framework for climate justice.
@@ -338,7 +338,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 896,"Those who have polluted and continue to pollute the Earth's environment through unthinking industrialization starting 200 years ago must pay for the grants, investments, and subsidies needed for the most vulnerable countries to adapt to climate change.",prioritarian,"896 Those who have polluted and continue to pollute the Earth's environment through unthinking industrialization starting 200 years ago must pay for the grants, investments, and subsidies needed for the most vulnerable countries to adapt to climate change.
 ",prioritarian,1
 898,This is the time to finally begin acting on the fulfillment of our commitments and obligat ions to humanity.,utilitarian,"898 This is the time to finally begin acting on the fulfillment of our commitments and obligat ions to humanity.
-",utilitarian,1
+",general normative statement,1
 899,"Your Excellences, Ladies and Gentlemen,Addressing global warming and prevention of climate change depends on the ability of all nations to set aside differences and join together in resolving these challenges.",egalitarian,"899 Your Excellences, Ladies and Gentlemen,Addressing global warming and prevention of climate change depends on the ability of all nations to set aside differences and join together in resolving these challenges.
 ",egalitarian,1
 909,Climate change requires all countries to work together and share knowledge and tools.,egalitarian,"909 Climate change requires all countries to work together and share knowledge and tools.
@@ -350,7 +350,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 926,It is our deep belief that addressing global warming andclimate change should not lead to further increase of poverty.,egalitarian,"926 It is our deep belief that addressing global warming andclimate change should not lead to further increase of poverty.
 ",sufficientarian,1
 929,The solution of this equilibrium will determine the living standard of our descendants.,utilitarian,"929 The solution of this equilibrium will determine the living standard of our descendants.
-",utilitarian,1
+",sufficientarian,1
 937,We must double down on our efforts to cut emissions and mitigate the impact of the climate crisis.,general normative statement,"937 We must double down on our efforts to cut emissions and mitigate the impact of the climate crisis.
 ",utilitarian,1
 952,"It takes truly global action: not just by the EU and the rest of the developed world, although we do shoulder a special responsibility.",egalitarian,"952 It takes truly global action: not just by the EU and the rest of the developed world, although we do shoulder a special responsibility.
@@ -364,7 +364,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 971," Such a transformation is both a challenge and an oppo rtunity, but mostly, it’s fundamentally necessary if we hope to have any success in mitigating climate change .",utilitarian,"971  Such a transformation is both a challenge and an oppo rtunity, but mostly, it’s fundamentally necessary if we hope to have any success in mitigating climate change .
 ",utilitarian,1
 994,"  Just as we commit to this agenda as individual nations, our multilateral development banks – including the World Bank – must be wholeheartedly committed to this, from their purpose to their actions.",general normative statement,"994   Just as we commit to this agenda as individual nations, our multilateral development banks – including the World Bank – must be wholeheartedly committed to this, from their purpose to their actions.
-",egalitarian,1
+",general normative statement,1
 995, We have a moral imperative and driving need for our institutions to work with countries across the developed and developing world .,egalitarian,"995  We have a moral imperative and driving need for our institutions to work with countries across the developed and developing world .
 ",prioritarian,1
 997,"This will mean increasing the proportion of funding spent on climate, but also ensuring that such funding doesn’t saddle developing countries with unsustai nable debt.",egalitarian,"997 This will mean increasing the proportion of funding spent on climate, but also ensuring that such funding doesn’t saddle developing countries with unsustai nable debt.
@@ -388,7 +388,7 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 1087,"Being one of the c ountries most affected by climate change, our shared goal must be to bridge the gap between aspiration and action , through strong g lobal cooperation.",prioritarian,"1087 Being one of the c ountries most affected by climate change, our shared goal must be to bridge the gap between aspiration and action , through strong g lobal cooperation.
 ",utilitarian,1
 1088,"We encourage the international community to honour their commitments to international agreements, particularly the Paris Agreement.",egalitarian,"1088 We encourage the international community to honour their commitments to international agreements, particularly the Paris Agreement.
-",egalitarian,1
+",general normative statement,1
 1089,"Adequate and predictable funding, structured for quick disbursement and not tied up in complex red -tape, is essential to support countries like ours, as we embark on this transformative journey.",prioritarian,"1089 Adequate and predictable funding, structured for quick disbursement and not tied up in complex red -tape, is essential to support countries like ours, as we embark on this transformative journey.
 ",prioritarian,1
 1090,"We call upon the developed countries that have contributed more to the accumulation of greenhouse gas emissions, to deliver on their promise s and increase financial support to vulnerable nations , to enable them undertake the necessary transitions , and build climate -resilient societies that are critical to meeting the SDG targets.",prioritarian,"1090 We call upon the developed countries that have contributed more to the accumulation of greenhouse gas emissions, to deliver on their promise s and increase financial support to vulnerable nations , to enable them undertake the necessary transitions , and build climate -resilient societies that are critical to meeting the SDG targets.
@@ -398,13 +398,13 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 1093,"We must view climate education as an investment in the future , which require s the effort of all.",utilitarian,"1093 We must view climate education as an investment in the future , which require s the effort of all.
 ",utilitarian,1
 1095,"It is incumbent upon us to act together, with determination and urgency.",utilitarian,"1095 It is incumbent upon us to act together, with determination and urgency.
-",utilitarian,1
-1098,"Together, we can achieve our climate goals, and through collective action, we can ensure that finance, climate transition, and adaptation are not just themes for discussion but cornerstones of our shared future to have a healthy and wealthy planet.",utilitarian,"1098 Together, we can achieve our climate goals, and through collective action, we can ensure that finance, climate transition, and adaptation are not just themes for discussion but cornerstones of our shared future to have a healthy and wealthy planet.
 ",egalitarian,1
+1098,"Together, we can achieve our climate goals, and through collective action, we can ensure that finance, climate transition, and adaptation are not just themes for discussion but cornerstones of our shared future to have a healthy and wealthy planet.",utilitarian,"1098 Together, we can achieve our climate goals, and through collective action, we can ensure that finance, climate transition, and adaptation are not just themes for discussion but cornerstones of our shared future to have a healthy and wealthy planet.
+",utilitarian,1
 1099,"Thank you, and let us work together for a more sustainable and resilient world.",utilitarian,"1099 Thank you, and let us work together for a more sustainable and resilient world.
 ",general normative statement,1
 1110,"We implore the global commun ity to bolster international cooperation, facilitating the transfer of green technologies to developing nations and call for the phase out of fossil fuel as a priority.",prioritarian,"1110 We implore the global commun ity to bolster international cooperation, facilitating the transfer of green technologies to developing nations and call for the phase out of fossil fuel as a priority.
-",utilitarian,1
+",egalitarian,1
 1113,"  We call for increased support to enhance our adaptive capacity, especially in the areas of water resource management, agriculture, health and infrastructure.",prioritarian,"1113   We call for increased support to enhance our adaptive capacity, especially in the areas of water resource management, agriculture, health and infrastructure.
 ",prioritarian,1
 1117,It is imperative that adaptation financing must be the high point of COP28 and becomes more accessible and tailored to the specific needs of the most vulnerable.,prioritarian,"1117 It is imperative that adaptation financing must be the high point of COP28 and becomes more accessible and tailored to the specific needs of the most vulnerable.
@@ -414,15 +414,15 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 1121,Until the fund is fully funded and opera tionalised Jamaica calls for consideration to be given to the facilitation of an emergency compensation mechanism for the 20? Most impacted countries to receive well needed assistance immediately.,prioritarian,"1121 Until the fund is fully funded and opera tionalised Jamaica calls for consideration to be given to the facilitation of an emergency compensation mechanism for the 20? Most impacted countries to receive well needed assistance immediately.
 ",prioritarian,1
 1123,"Jamaica urges developed nations to fulfill their commitment to mobilize $100 billion annually, with a substantial portion allocated to adaptation efforts.",general normative statement,"1123 Jamaica urges developed nations to fulfill their commitment to mobilize $100 billion annually, with a substantial portion allocated to adaptation efforts.
-",prioritarian,1
+",egalitarian,1
 1127,We emphasize the need for coherent and comprehensive policies that integrate climate considerations across all sectors.,egalitarian,"1127 We emphasize the need for coherent and comprehensive policies that integrate climate considerations across all sectors.
 ",general normative statement,1
 1129,In addition we urge that climate change impacts on Oceans and Education be included in the critical areas for mainstreaming attention.,general normative statement,"1129 In addition we urge that climate change impacts on Oceans and Education be included in the critical areas for mainstreaming attention.
 ",general normative statement,1
 1135,"We encourage all nations to adopt a similar approach, recognizing that collective action is the only way forwar d.",egalitarian,"1135 We encourage all nations to adopt a similar approach, recognizing that collective action is the only way forwar d.
-",egalitarian,1
+",utilitarian,1
 1139,"Let us rise above our differences, unite in purpose, and forge a path towards a sustainable and resilient future.",egalitarian,"1139 Let us rise above our differences, unite in purpose, and forge a path towards a sustainable and resilient future.
-",egalitarian,1
+",utilitarian,1
 1150," So, my friends, as we meet here today to talk about inclusivity in climate response , let’s be inclusive of the most vulnerable : Palestinians , severely impacted by the war on Gaza.",prioritarian,"1150  So, my friends, as we meet here today to talk about inclusivity in climate response , let’s be inclusive of the most vulnerable : Palestinians , severely impacted by the war on Gaza.
 ",prioritarian,1
 1172," As we work to catch up on lost time and progress , we cannot forget the most vulnerable .",prioritarian,"1172  As we work to catch up on lost time and progress , we cannot forget the most vulnerable .
@@ -430,8 +430,8 @@ unique_id,text,PRINCIPLE_x,llm_query,PRINCIPLE_y,iteration
 1173," Conflict -ridden communities, refugees, and developing countries must not be left alone to face a global problem.",prioritarian,"1173  Conflict -ridden communities, refugees, and developing countries must not be left alone to face a global problem.
 ",prioritarian,1
 1174,"Nor can we stand by , as the massive destruction of a relentless war in Gaza threatens more people and holds back progress toward a better global future.",utilitarian,"1174 Nor can we stand by , as the massive destruction of a relentless war in Gaza threatens more people and holds back progress toward a better global future.
-",prioritarian,1
+",utilitarian,1
 1198," We recognise that we must deliver on our collective commitment to the US $100 billion goal, and on loss and damage finance, and do it in a way that works for our partners in the Pacific.",prioritarian,"1198  We recognise that we must deliver on our collective commitment to the US $100 billion goal, and on loss and damage finance, and do it in a way that works for our partners in the Pacific.
-",prioritarian,1
+",egalitarian,1
 1205," We need a course correction, and working together is critical for global prosperity in a carbon constrained future.",utilitarian,"1205  We need a course correction, and working together is critical for global prosperity in a carbon constrained future.
 ",utilitarian,1
