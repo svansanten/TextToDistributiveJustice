@@ -291,6 +291,7 @@ def gpt_annotate(text_to_annotate, codebook, key, seed, fingerprint, experiment,
         missed_batch = f'{seed} - I{j + 1} - B{i + 1}'
         print(missed_batch,'fingerprint does not match')
         missed_batches.append(missed_batch)
+
       time.sleep(.5)
 
     # print status report  
@@ -343,12 +344,9 @@ def gpt_annotate(text_to_annotate, codebook, key, seed, fingerprint, experiment,
 
     #### OUTPUT FINGERPRINTS
     # Save fingerprints dataframe to CSV - final dataframe includes all seeds
-    global fingerprints
     fingerprints.to_csv(f'NUM_RESULT/{experiment}/T{temperature}_fingerprints_all.csv')
-    #### OUTPUT MISSED BATCHES
 
-    global missed_batches
-    # Convert the list to a DataFrame when needed
+    # OUTPUT: save missed batches dataframe to CSV
     missed_batches_df = pd.DataFrame(missed_batches, columns=["Missed batch"])
     missed_batches_df.to_csv(f'NUM_RESULT/{experiment}/T{temperature}_missed_batches.csv')
 

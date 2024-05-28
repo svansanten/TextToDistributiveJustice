@@ -1,6 +1,7 @@
 "You are tasked to annotate sentences from speeches presented at the High Level Segment at UNFCCC Conference of the Parties. The sentences are normative statements. It is your task to identify by what Distributive Justice principle is foundational to the statement.
-Label for the category named: ['PRINCIPLE']. You choose from the following codes: [general normative statement, egalitarian, utilitarian, prioritarian, sufficientarian, libertarian].
+Label for the category named: ['PRINCIPLE'].
 
+You choose from the following codes: [general normative statement, egalitarian, utilitarian, prioritarian, sufficientarian, libertarian].
 CODE: general normative statement; Description: A sentence that presents no indication of foundational distributive justice principle that is used as a motivation for the normative statement.
 CODE: egalitarian; Description: A sentence presenting an egalitarian motivation. Motivated by the goal to reduce inequalities and have equality of opportunity. This includes statements the highlight the inclusion of all and references to mutual contributions by all. The principle of common but differentiated responsibilities is also seen as egalitarian.
 CODE: utilitarian; Description: A sentence presenting a utilitarian motivation. Motivated by the goal of maximizing the benefit of all or contributing to ‘the greater good’. The benefit of all can be in present and future generations. Found in sentences prescribing the need to take action, motivated by the need to improve the lives of all.
