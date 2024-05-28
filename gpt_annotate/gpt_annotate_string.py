@@ -287,7 +287,7 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
         print(f'Iteration{j}, batch{i}: fingerprintmatch found!')
         out = pd.concat([out, text_df_out])
       else:
-        print(f'Iteration{j}, batch{i}: fingerprint does not match'))
+        print(f'Iteration{j}, batch{i}: fingerprint does not match')
       time.sleep(.5)
 
     # print status report  
@@ -308,11 +308,11 @@ def gpt_annotate(text_to_annotate, codebook, key, seed,
   out_all.fillna(0, inplace=True)
 
   ##### output: full annotation results - seed name is included in file
-  out_all.to_csv(f'gpt_out_all/all_iterations_string_{seed}.csv',index=False)
+  out_all.to_csv(f'STRING_RESULT/B1.0/all_iterations_string_{seed}.csv',index=False)
 
   # OUTPUT: Save fingerprints dataframe to CSV - final dataframe includes all seeds
   global fingerprints
-  fingerprints.to_csv(f'fingerprints_all.csv')
+  fingerprints.to_csv(f'STRING_RESULT/B1.0/fingerprints_all.csv')
 
   return out_all
 
