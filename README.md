@@ -1,5 +1,5 @@
 # TextToDistributiveJustice
-*TU Delft Masterthesis - Aiming to identify Distributive Justice Principles in COP high level segment speeches* 
+*TU Delft Masterthesis - Towards Just Policy Evaluation - unravelling Distributive Justice Principles in a Global Climate Policy Context* 
 
 This repository was used in a masterthesis that aimed to answer the following question: 
 "To what extent can Large Language Models accurately identify and enhance our understanding of distributive justice preferences in climate negotiation texts?"
@@ -27,12 +27,12 @@ In addition to the results generated in this study, this repository presents a c
   - HLS_full.csv, combined manually annotated dataset with preprocessed numerical and string labels per category
   - Manual annotation - Results.ipynb, exploratory data analysis of HLS_full
   - Manual annotation - numerical dataprep & string dataprep, conversion of raw annotation files to pre-defined categories
-- DJ_GPT_analysis (Additional ReadME)
-  - Codebooks
-  - data
-  - results
-  - gpt_annotate_num.py
-  - gpt_annotate_string.py
-- Result analysis 
+- DJ_GPT_analysis (Additional ReadME with more details available)
+  - Codebooks, all codebooks used as prompts for GPT
+  - data, test and train datasets as CSV
+  - results, raw annotation outputs and analysis
+  - gpt_annotate_num.py, software calling GPT API, evaluates numerical labels
+  - gpt_annotate_string.py, software calling GPT API, evaluates string labels
+
 
 Reach out to suze.vansanten@gmail.com with any questions or suggestions. 
