@@ -6,6 +6,7 @@ This repository was used in a masterthesis that aimed to answer the following qu
 This question was answered with a case study of COP High Level Segment speeches and GPT-4o. The complete research is available at: [repository]
 
 **Workflow**
+
 The workflow and software for LLM-augmented text annotation is adapted from [Pangakis et al. (2023)](https://arxiv.org/abs/2306.00176).
 Part A: Manual annotation
 A deductive approach is used to create a theoretical codebook to classify sentences for distributive justice principles. In addition to principles, sentences are annotated for relevance, topic, unit of distribution, and shape of distibution. 

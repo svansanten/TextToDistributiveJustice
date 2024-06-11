@@ -6,7 +6,7 @@ Inclusion of seed
 ## Overview
 
 Given a codebook (.txt) and a dataset (.csv) that has one text column and any number of category columns as binary indicators, the main function (`gpt_annotate`) annotates
-all the samples using an OpenAI GPT model (ChatGPT or GPT-4) and calculates performance metrics (if there are provided human labels). Before running `gpt_annotate`,
+all the samples using an OpenAI GPT model (ChatGPT or GPT-4) and calculates performance metrics. Before running `gpt_annotate`,
 users should run `prepare_data` to ensure that their data is in the correct format.
 
 Flow of `gpt_annotate`:
@@ -17,7 +17,7 @@ Flow of `gpt_annotate`:
         then also adds whether it is a true positive, false positive, true negative, or false negative.
 *   4) Finally, if provided human labels, the function calculates performance metrics (accuracy, precision, recall, and f1) for every category.
 
-The main function (`gpt_annotate`) returns four .csv's, if human labels are provided.
+The main function (`gpt_annotate`) returns four .csv's for each instance of the model, if human labels are provided.
 If no human labels are provided, the main function only returns 1 and 2 listed below.
 *   1) `gpt_out_all_iterations.csv`
   *   Raw outputs for every iteration.
@@ -27,8 +27,6 @@ If no human labels are provided, the main function only returns 1 and 2 listed b
   *   Accuracy, precision, recall, and f1.
 *   4) `incorrect.csv`
   *   Any incorrect classification or classification with less than 1.0 consistency.
-
-Our code aims to streamline automated text annotation for different datasets and numbers of categories.
 
 """
 
@@ -69,10 +67,6 @@ def prepare_data(text_to_annotate, codebook, key,
     OpenAI API key
   prep_codebook: 
       boolean indicating whether to standardize beginning and end of codebook to ensure that the LLM prompt is annotating text samples.
-  human_labels: 
-      boolean indicating whether text_to_annotate has human labels to compare LLM outputs to. 
-  no_print_preview:
-    Does not print preview of user's data after preparing.
 
   Returns:
     Updated dataframe (text_to_annotate) and codebook (if prep_codebook = True) that are ready to be used for annotation using gpt_annotate.
@@ -181,23 +175,36 @@ def gpt_annotate(text_to_annotate, codebook, key, seed, fingerprint, experiment,
     String detailing the task-specific instructions.
   key:
     OpenAI API key.
+  seed:
+    seed used in API call
+  fingerprint:
+    fingerprint for which post call filtering is applied
+  experiment:
+    experiment name, to save in right folder
   num_iterations:
     Number of times to classify each text sample.
   model:
     OpenAI GPT model, which is either gpt-3.5-turbo or gpt-4
-  temperature: 
+  temperature:
     LLM temperature parameter (ranges 0 to 1), which indicates the degree of diversity to introduce into the model.
   batch_size:
     number of text samples to be annotated in each batch.
-  human_labels: 
-    boolean indicating whether text_to_annotate has human labels to compare LLM outputs to. 
-  data_prep_warning: 
-    boolean indicating whether to print data_prep_warning
-  time_cost_warning: 
-    boolean indicating whether to print time_cost_warning
-
+  human_labels:
+    boolean indicating whether text_to_annotate has human labels to compare LLM outputs to.
 
   Returns 5 files
+*   1) `all_iterations [seed]'
+  *   Raw outputs for every iteration.
+*   2) `gpt_out_final [seed].csv`
+  *   Annotation outputs after taking modal category answer and calculating consistency scores.
+*   3) `performance_metrics [seed].csv`
+  *   Accuracy, precision, recall, and f1.
+*   4) `incorrect [seed].csv`
+  *   Any incorrect classification or classification with less than 1.0 consistency.
+
+Additional outputs
+  All fingerprints of all API calls
+  Batches that were filtered out by postcall filtering of fingerprint
   """
 
   
@@ -473,10 +480,6 @@ def get_classification_categories(codebook, key):
   temperature = 0
 
   ## Specify model to use
-  # As of 22-05-2024, gpt-4-turbo-2024-04-09 seems to be the only gpt-model that returns a fingerprint in addition to gpt-4o
-
-  # model= "gpt-4-turbo-2024-04-09"
-  # model = "gpt-3.5-turbo-0125"
   model = "gpt-4o"
 
   # Set seed for category determination
@@ -640,8 +643,6 @@ def evaluate_classification(df, category, num_categories):
     Added columns to input dataframe specifying whether the GPT annotation category is correct and whether it is a tp, fp, tn, or fn
   """
 
-  ## Potential change here to counter the 2's in the outcome
-
   # account for indexing starting at 0
   category = category + 1
   # specify category
@@ -777,25 +778,6 @@ def estimate_time_cost(text_to_annotate, codebook, llm_query,
   """
   This function estimates the cost and time to run gpt_annotate().
   It is depreciated for application with GPT-4o
-  text_to_annotate:
-    Input data that will be annotated.
-  codebook:
-    String detailing the task-specific instructions.
-  llm_query:
-    Codebook plus the text samples in batch that will annotated.
-  model:
-    OpenAI GPT model, which is either gpt-3.5-turbo or gpt-4
-  num_iterations:
-    Number of iterations in gpt_annotate
-  num_batches:
-    number of batches in gpt_annotate
-  batch_size:
-    number of text samples in each batch
-  col_names:
-    Category names to be annotated
-
-  Returns:
-    quit, which is a boolean indicating whether to continue with the annotation process.
   """
   # input estimate
   num_input_tokens = num_tokens_from_string(codebook + llm_query, "cl100k_base")
