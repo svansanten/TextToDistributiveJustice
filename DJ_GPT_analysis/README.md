@@ -1,4 +1,4 @@
-# TextToDistributiveJustice
+# DJ_GPT_analysis
 *TU Delft Masterthesis: Towards Just Policy Evaluation - unravelling Distributive Justice Principles in a Global Climate Policy Context*
 
 DJ_GPT analysis contains all documents used for sentence annotation with GPT-4o. 2 files are used for the automated text annotation:
